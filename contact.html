@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Green Maseru Campaign 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1a3a2a;
+    --green-mid: #2d6a4f;
+    --green-bright: #52b788;
+    --green-light: #95d5b2;
+    --cream: #f8f4e9;
+    --gold: #c9a84c;
+    --white: #ffffff;
+    --text-dark: #1a1a1a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(26,58,42,0.97); backdrop-filter: blur(12px);
+    padding: 0 2rem; height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 2px solid var(--green-bright);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--green-light); letter-spacing: 1px; text-decoration: none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { color: var(--white); text-decoration: none; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.3s; position: relative; padding-bottom: 4px; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--green-bright); transition: width 0.3s; }
+  .nav-links a:hover { color: var(--green-light); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--green-bright); }
+  .nav-links a.active::after { width: 100%; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 26px; height: 2px; background: var(--white); transition: all 0.3s; border-radius: 2px; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: rgba(26,58,42,0.98); padding: 2rem; flex-direction: column; gap: 1.5rem; z-index: 999; border-top: 1px solid var(--green-bright); }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { color: var(--white); text-decoration: none; font-size: 1.1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid rgba(82,183,136,0.2); padding-bottom: 1rem; }
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  .page-hero {
+    min-height: 45vh; background: linear-gradient(135deg, var(--green-deep) 0%, #0d2318 100%);
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    position: relative; overflow: hidden; padding: 6rem 2rem 3rem;
+  }
+  .page-hero-bg { position: absolute; inset: 0; opacity: 0.06; background-image: radial-gradient(circle, var(--green-bright) 1px, transparent 1px); background-size: 40px 40px; }
+  .page-hero-content { position: relative; z-index: 2; }
+  .page-hero-badge { display: inline-block; background: rgba(82,183,136,0.15); border: 1px solid var(--green-bright); color: var(--green-bright); padding: 6px 18px; border-radius: 50px; font-size: 0.75rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); color: var(--white); font-weight: 900; margin-bottom: 1rem; }
+  .page-hero p { color: rgba(255,255,255,0.7); max-width: 550px; margin: 0 auto; line-height: 1.8; font-size: 1rem; }
+
+  .contact-section { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+  .section-tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: var(--green-mid); font-weight: 700; margin-bottom: 0.8rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--green-deep); margin-bottom: 2rem; line-height: 1.2; }
+
+  /* SOCIAL CARDS */
+  .social-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;
+    margin-bottom: 4rem;
+  }
+  .social-card {
+    border-radius: 16px; padding: 2.5rem; display: flex; flex-direction: column;
+    align-items: flex-start; gap: 1.2rem; text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden;
+  }
+  .social-card::before {
+    content: ''; position: absolute; inset: 0; opacity: 0.08;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .social-card:hover { transform: translateY(-6px); }
+  .social-card.facebook {
+    background: linear-gradient(135deg, #1877f2 0%, #0c4fa8 100%);
+    box-shadow: 0 10px 40px rgba(24,119,242,0.3);
+  }
+  .social-card.facebook:hover { box-shadow: 0 20px 60px rgba(24,119,242,0.45); }
+  .social-card.whatsapp {
+    background: linear-gradient(135deg, #25d366 0%, #128c3e 100%);
+    box-shadow: 0 10px 40px rgba(37,211,102,0.3);
+  }
+  .social-card.whatsapp:hover { box-shadow: 0 20px 60px rgba(37,211,102,0.45); }
+  .social-icon { font-size: 3rem; position: relative; z-index: 1; }
+  .social-card-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); font-weight: 700; position: relative; z-index: 1; }
+  .social-card-desc { color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.6; position: relative; z-index: 1; }
+  .social-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.2); color: var(--white);
+    padding: 10px 22px; border-radius: 50px; font-size: 0.85rem;
+    font-weight: 600; border: 1px solid rgba(255,255,255,0.35);
+    transition: background 0.3s; position: relative; z-index: 1; margin-top: auto;
+  }
+  .social-card:hover .social-cta { background: rgba(255,255,255,0.3); }
+  .social-arrow { font-size: 1rem; transition: transform 0.3s; }
+  .social-card:hover .social-arrow { transform: translateX(4px); }
+
+  /* CONTACT INFO */
+  .contact-info-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    background: var(--green-deep); border-radius: 16px; padding: 3rem; margin-bottom: 4rem;
+  }
+  .info-item { text-align: center; }
+  .info-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .info-item h4 { color: var(--green-light); font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 0.5rem; }
+  .info-item p { color: rgba(255,255,255,0.65); font-size: 0.88rem; line-height: 1.6; }
+
+  /* HASHTAGS */
+  .hashtags-section { text-align: center; padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.08); }
+  .hashtags-section h3 { font-family: 'Playfair Display', serif; color: var(--green-deep); font-size: 1.4rem; margin-bottom: 1.5rem; }
+  .hashtags { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
+  .hashtag {
+    background: var(--white); color: var(--green-mid); border: 1.5px solid var(--green-bright);
+    padding: 8px 20px; border-radius: 50px; font-size: 0.9rem; font-weight: 600;
+    transition: all 0.3s; cursor: default;
+  }
+  .hashtag:hover { background: var(--green-bright); color: var(--white); }
+
+  /* JOIN BANNER */
+  .join-banner {
+    background: linear-gradient(135deg, var(--green-bright), var(--green-mid));
+    border-radius: 16px; padding: 3.5rem; text-align: center; margin-top: 3rem;
+  }
+  .join-banner h3 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 2rem; margin-bottom: 1rem; }
+  .join-banner p { color: rgba(255,255,255,0.85); max-width: 500px; margin: 0 auto 2rem; line-height: 1.7; }
+  .join-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .join-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--white); color: var(--green-deep);
+    padding: 12px 28px; border-radius: 6px; text-decoration: none;
+    font-weight: 700; font-size: 0.9rem; transition: all 0.3s;
+  }
+  .join-btn:hover { background: var(--cream); transform: translateY(-2px); }
+
+  footer { background: var(--green-deep); color: rgba(255,255,255,0.6); text-align: center; padding: 2rem; font-size: 0.85rem; border-top: 1px solid rgba(82,183,136,0.2); }
+  footer strong { color: var(--green-light); }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .social-grid { grid-template-columns: 1fr; }
+    .contact-info-grid { grid-template-columns: 1fr; padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Green<span>Maseru</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About Us</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-badge">Get In Touch</div>
+    <h1>Join the Movement</h1>
+    <p>Connect with us on social media, follow our channels, and be part of the conversation that is transforming Maseru into a greener city.</p>
+  </div>
+</section>
+
+<div class="contact-section">
+
+  <!-- SOCIAL CHANNELS -->
+  <div class="section-tag">Connect With Us</div>
+  <h2 class="section-title">Follow Our Channels</h2>
+
+  <div class="social-grid">
+    <a href="https://www.facebook.com/share/1B2kkmN9cm/?mibextid=wwXIfr" target="_blank" rel="noopener" class="social-card facebook">
+      <div class="social-icon"></div>
+      <div class="social-card-title">Facebook Page</div>
+      <div class="social-card-desc">
+        Follow our official Facebook page for campaign updates, event announcements, photos, videos and community stories from the Green Maseru Campaign 2026.
+      </div>
+      <div class="social-cta">Visit Facebook Page <span class="social-arrow"></span></div>
+    </a>
+
+    <a href="https://whatsapp.com/channel/0029VbDA6u09hXEzfhfvoR2W" target="_blank" rel="noopener" class="social-card whatsapp">
+      <div class="social-icon"></div>
+      <div class="social-card-title">WhatsApp Channel</div>
+      <div class="social-card-desc">
+        Join our WhatsApp Channel to receive real-time updates, environmental tips, campaign schedules and behind-the-scenes content directly to your phone.
+      </div>
+      <div class="social-cta">Join WhatsApp Channel <span class="social-arrow"></span></div>
+    </a>
+  </div>
+
+  <!-- INFO CARDS -->
+  <div class="contact-info-grid">
+    <div class="info-item">
+      <div class="info-icon"></div>
+      <h4>Location</h4>
+      <p>Maseru, Lesotho<br>Active across all communities</p>
+    </div>
+    <div class="info-item">
+      <div class="info-icon"></div>
+      <h4>Campaign Period</h4>
+      <p>Five-day campaign across<br>schools, parks & streets</p>
+    </div>
+    <div class="info-item">
+      <div class="info-icon"></div>
+      <h4>Our Mission</h4>
+      <p>A cleaner, healthier and<br>greener Maseru for all</p>
+    </div>
+  </div>
+
+  <!-- HASHTAGS -->
+  <div class="hashtags-section">
+    <h3>Spread the Word — Use Our Hashtags</h3>
+    <div class="hashtags">
+      <span class="hashtag">#GreenMaseru</span>
+      <span class="hashtag">#KeepMaseruClean</span>
+      <span class="hashtag">#ProtectOurEnvironment</span>
+      <span class="hashtag">#GreenMaseru2026</span>
+      <span class="hashtag">#SayYesToGreen</span>
+      <span class="hashtag">#SayNoToPollution</span>
+      <span class="hashtag">#CleanMaseru</span>
+    </div>
+  </div>
+
+  <!-- JOIN BANNER -->
+  <div class="join-banner">
+    <h3>Everyone Has a Role to Play</h3>
+    <p>Government institutions, schools, businesses, and individuals all have a role in protecting the environment. Together we build a sustainable future for generations to come.</p>
+    <div class="join-links">
+      <a href="https://www.facebook.com/share/1B2kkmN9cm/?mibextid=wwXIfr" target="_blank" class="join-btn">Facebook</a>
+      <a href="https://whatsapp.com/channel/0029VbDA6u09hXEzfhfvoR2W" target="_blank" class="join-btn"> WhatsApp</a>
+      <a href="about.html" class="join-btn">Learn More</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>&copy; 2026 <strong>Green Maseru Campaign</strong>. All rights reserved. Say No to Pollution — Say Yes to Green.</p>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+document.querySelectorAll('.mobile-menu a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
